@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor & Ronnie Wedding Party Countdown</title>
+    
+    <style>
+        /* --- 1. Basic Setup & Variables --- */
+        :root {
+            --primary-color: #A34969; /* Deep Rose Pink */
+            --secondary-color: #F8EFEA; /* Light Cream (used for text on primary background) */
+            --text-color-light: #F8EFEA; /* Light text for dark containers */
+            --text-color-dark: #333; /* Dark text for light containers */
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --font-title: 'Georgia', serif; 
+            --whatsapp-green: #25D366; /* Official WhatsApp Green */
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color-dark);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            
+            /* --- BACKGROUND IMAGE STYLES --- */
+            background-image: url('Screenshot (103).png'); 
+            background-size: cover; 
+            background-position: center center; 
+            background-repeat: no-repeat; 
+            background-attachment: fixed; 
+            position: relative; 
+            z-index: 1; 
+            overflow-x: hidden; 
+        }
+        
+        /* Dark overlay for better text readability and background visibility */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2); 
+            z-index: -1; 
+        }
+
+        /* --- 2. Header & Navigation --- */
+        header {
+            width: 100%;
+            background-color: var(--primary-color); 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); 
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+
+        .header-logo {
+            content: url('WhatsApp Image 2025-10-07 at 23.17.25_15c94797.jpg'); 
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-color); 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-right: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--secondary-color); 
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: color 0.3s, border-bottom 0.3s;
+            padding-bottom: 3px;
+        }
+
+        nav a:hover {
+            color: white;
+            border-bottom: 2px solid white; 
+        }
+
+        /* --- 3. Main Countdown Container --- */
+        .countdown-container {
+            max-width: 900px;
+            width: 90%; 
+            padding: 30px 20px;
+            margin-top: 100px;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.9); 
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            color: var(--text-color-dark); 
+            box-sizing: border-box;
+            flex-grow: 0; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            color: var(--primary-color);
+            font-size: 3.5em; 
+            margin-bottom: 0.1em;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        /* Styling for the subtitle in the countdown box */
+        .countdown-container h4 {
+            color: var(--primary-color);
+            font-size: 1.4em;
+            margin-top: 0.5em;
+            margin-bottom: 2.5em;
+            font-weight: 400;
+        }
+        
+        /* --- 4. Countdown Timer Styling --- */
+        #timer {
+            display: flex;
+            justify-content: center;
+            gap: 25px; 
+            margin-top: 20px;
+        }
+
+        .time-box {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 25px 35px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            min-width: 100px;
+            transition: transform 0.2s, background-color 0.3s; 
+            overflow: hidden; 
+        }
+
+        .time-box:hover {
+            transform: translateY(-5px) scale(1.05); 
+            background-color: #B85F7F; 
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 4.5em; 
+            font-weight: bold;
+            line-height: 1;
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+        }
+
+        .time-box small {
+            font-size: 1.1em;
+            margin-top: 8px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- 5. Shared Section Styles (Treasurer & Bridegroom) --- */
+        .treasurer-section {
+            max-width: 900px;
+            width: 90%; 
+            background: var(--primary-color); 
+            color: var(--text-color-light); 
+            padding: 30px 20px;
+            margin-top: 30px; 
+            margin-bottom: 50px; 
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Specific avatar content for Treasurer */
+        .treasurer-section:first-of-type .treasurer-avatar {
+             content: url('Screenshot (114).png'); 
+        }
+
+        /* Specific avatar content for Bridegroom - Use a different selector for this one if images differ */
+        .treasurer-section:last-of-type .treasurer-avatar {
+             content: url('victor.jpg'); 
+        }
+
+        .treasurer-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; 
+            object-fit: cover;
+            border: 4px solid var(--secondary-color); 
+            margin-bottom: 15px;
+        }
+        
+        .treasurer-section h4 {
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .treasurer-section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin: 10px 0;
+            padding: 0 20px;
+            max-width: 700px;
+        }
+        
+        
+        /* --- WhatsApp Button Styles --- */
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center; 
+            padding: 12px 25px;
+            margin-top: 20px;
+            background-color: var(--whatsapp-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #1DA851; 
+            transform: translateY(-2px);
+        }
+        
+        .whatsapp-icon-img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            filter: invert(1); 
+            vertical-align: middle; 
+        }
+        
+        /* --- 6. Footer Styling (Existing) --- */
+        footer {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--text-color-light); 
+            padding: 30px 20px; 
+            box-sizing: border-box;
+            font-size: 1em; 
+            line-height: 1.6;
+        }
+
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        footer h2, footer h3, footer h4 {
+            color: var(--text-color-light);
+            margin: 5px 0;
+            font-weight: 400;
+        }
+
+        footer h2 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        footer h3 {
+             font-size: 1.1em;
+             margin-top: 15px;
+        }
+        
+        footer h4 {
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px; 
+        }
+
+        .social-links a {
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 45px; 
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.25); 
+            border-radius: 50%;
+            transition: background-color 0.3s, transform 0.2s;
+            color: var(--text-color-light);
+            font-weight: bold;
+            font-size: 1em;
+        }
+        
+        .social-links a:hover {
+            background-color: rgba(255, 255, 255, 0.5); 
+            transform: translateY(-5px); 
+        }
+
+        .social-links a img {
+            width: 70%; 
+            height: 70%;
+            object-fit: contain; 
+            border-radius: 50%; 
+        }
+
+
+        /* --- 7. Responsive Adjustments --- */
+        @media (max-width: 768px) { 
+            header {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .header-logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            nav ul {
+                justify-content: center;
+                padding: 0;
+            }
+            
+            h1 {
+                font-size: 2.5em; 
+            }
+            .countdown-container h4 {
+                font-size: 1.2em;
+            }
+            #timer {
+                flex-wrap: wrap; 
+                gap: 15px; 
+            }
+            .time-box {
+                padding: 15px 20px;
+                min-width: unset;
+                flex: 1 1 calc(50% - 30px); 
+                max-width: calc(50% - 30px); 
+            }
+            .time-box span {
+                font-size: 3em; 
+            }
+            .countdown-container {
+                margin-top: 130px;
+            }
+            .treasurer-section h4 {
+                font-size: 1.4em;
+            }
+            .treasurer-section p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) { 
+            h1 {
+                font-size: 1.8em;
+            }
+            .time-box {
+                flex: 1 1 100%; 
+                max-width: 100%;
+                padding: 10px 15px;
+            }
+            .time-box span {
+                font-size: 2.2em;
+            }
+            .countdown-container {
+                margin-top: 150px;
+            }
+            .whatsapp-button {
+                padding: 10px 20px;
+                font-size: 1.1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <audio id="beepSound" src="beep.mp3" preload="auto"></audio>
+
+    <header>
+        <img src="WhatsApp Image 2025-10-07 at 23.17.25_15c94797.jpg" alt="Ryavic Enterprises Limited Logo" class="header-logo"> 
+        <nav>
+            <ul>
+                <li><a href="Evans.html">About Us</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/1NbiOPbqGEzjq1Lzlshrv4xCWy-MOvmFzVGp5y_H3UNw/edit?usp=sharing">Contributions</a></li>
+            </ul>
+        </nav>
+    </header>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="treasurer-section" id="contributions">
+        <img src="Screenshot (114).png" alt="Treasurer's Photo" class="treasurer-avatar">
+        
+        <h4>Message from the Treasurer</h4>
+        
+        <p>
+            Dear esteemed guests and well-wishers,
+            <br>
+            On behalf of Victor and Ronnie, I warmly welcome you to celebrate their union! Your presence is the greatest gift. 
+            Should you wish to contribute towards their new life journey, kindly send your financial support to the official wedding account details listed below. Every contribution, big or small, is deeply appreciated. 
+            <br><br>
+            Account Details
+            <br>
+            Mobile Money: +256 771696788 Oyebazibwe Avernus
+            <br>
+            Bank: Centenary Bank - Account No: 3200894558 Turyahebwa Victor
+        </p>
+
+        <a href="https://wa.me/256771696788" class="whatsapp-button" target="_blank">
+            <img src="whatsapp logo.jpg" alt="WhatsApp Icon" class="whatsapp-icon-img">
+            Message Treasurer Directly
+        </a>
+    </div>
+
+    <div class="treasurer-section" id="bridegroom-message">
+        <img src="victor.jpg" alt="Bridegroom's Photo" class="treasurer-avatar">
+        
+        <h4>Message from the Bridegroom</h4>
+        
+        <p>
+            Dear esteemed guests and well-wishers,
+            <br>
+           As we approach December 13th, 2025, I am grateful to everyone here for your time and active involvement
+            in my wedding preparations. Let us continue this journey together until the end, 
+           and I encourage everyone to use this countdown timer to stay updated. God Bless You.
+            <br><br>
+            Account Details
+            <br>
+            Mobile Money: +256 771696788 Oyebazibwe Avernus
+            <br>
+            Bank: Centenary Bank - Account No: 3200894558 Turyahebwa Victor
+        </p>
+
+        <a href="https://wa.me/256705959065" class="whatsapp-button" target="_blank">
+            <img src="whatsapp logo.jpg" alt="WhatsApp Icon" class="whatsapp-icon-img">
+            Message Bridegroom Directly
+        </a>
+    </div>
+    
+    
+    <footer>
+        <div class="footer-content">
+            <h2>Designed by Ryavic Enterprises Limited</h2>
+            <h3>Located in Dembedyo house Nasser road - Kampala.</h3>
+            <h4>Dealing in printing and branding, UI & UX designing, logo designing, web albums, stationary supplies and many others.</h4>
+            
+            <h3>Follow us:</h3>
+            <div class="social-links">
+                
+                <a href="#" target="_blank" title="Instagram">
+                    <img src="intagram.jpg" alt="instagram">
+                </a> 
+                <a href="" target="_blank" title="WhatsApp">
+                    <img src="whatsapp logo.jpg" alt="WhatsApp">
+                </a>
+                <a href="#" target="_blank" title="YouTube">
+                    <img src="youtube.png" alt="YouTube">
+                </a>
+                <a href="#" target="_blank" title="TikTok">
+                    <img src="tiktok.png" alt="TikTok">
+                </a>
+                <a href="#" target="_blank" title="Twitter/X">
+                    <img src="x.png" alt="Twitter/X">
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Get the current year dynamically
+        const currentYear = new Date().getFullYear(); 
+        
+        // Set the target date: December 13th of the current year (2025)
+        const targetDate = new Date(`December 13, ${currentYear} 00:00:00`).getTime();
+        
+        // Get the audio element (updated ID)
+        const beepSound = document.getElementById('beepSound');
+
+
+        // Function to update a single timer element with a smooth transition
+        function updateTimerElement(elementId, newValue, isSeconds) {
+            const element = document.getElementById(elementId);
+            const currentValue = element.innerHTML;
+
+            // Only update if the value has actually changed
+            if (currentValue !== newValue) {
+                
+                // --- Play sound only if the seconds have changed ---
+                if (isSeconds) {
+                    beepSound.currentTime = 0; 
+                    beepSound.play().catch(e => console.log("Audio playback blocked: ", e)); 
+                }
+
+                element.style.transform = 'translateY(100%)';
+                element.style.opacity = '0';
+                
+                setTimeout(() => {
+                    element.innerHTML = newValue;
+                    
+                    element.style.transition = 'none';
+                    element.style.transform = 'translateY(-100%)';
+                    element.style.opacity = '0';
+                    
+                    void element.offsetWidth; 
+                    
+                    element.style.transition = 'transform 0.8s ease-out, opacity 0.8s ease-out';
+                    element.style.transform = 'translateY(0)';
+                    element.style.opacity = '1';
+
+                }, 50);
+            }
+        }
+
+
+        // Update the count down every 1 second
+        const x = setInterval(function() {
+
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const MS_IN_DAY = 1000 * 60 * 60 * 24;
+            const MS_IN_HOUR = 1000 * 60 * 60;
+            const MS_IN_MINUTE = 1000 * 60;
+
+            const days = Math.floor(distance / MS_IN_DAY);
+            const hours = Math.floor((distance % MS_IN_DAY) / MS_IN_HOUR);
+            const minutes = Math.floor((distance % MS_IN_HOUR) / MS_IN_MINUTE);
+            const seconds = Math.floor((distance % MS_IN_MINUTE) / 1000);
+
+            const formatTime = (time) => String(time).padStart(2, '0');
+
+            updateTimerElement("days", formatTime(days), false);
+            updateTimerElement("hours", formatTime(hours), false);
+            updateTimerElement("minutes", formatTime(minutes), false);
+            updateTimerElement("seconds", formatTime(seconds), true);
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("timer").innerHTML = "<h2 style='color: var(--primary-color);'>The party has started!</h2>";
+                document.querySelector('.countdown-container h4').innerHTML = "Congratulations Victor & Ronnie!";
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>
